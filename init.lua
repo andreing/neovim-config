@@ -80,6 +80,14 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 --   :set makeprg=make\ #<.o
 vim.keymap.set('n', 'mm', ':wa<CR>:echo &makeprg<CR>:make<CR>', { desc = 'Build project' })
 
+-- Mappings for diagnostic window
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "open quickfix list (floating)" }, opts)
+vim.keymap.set('n', ',n', vim.diagnostic.goto_prev, { desc = "quickfix: goto previous" }, opts)
+vim.keymap.set('n', ',p', vim.diagnostic.goto_next, { desc = "quickfix: goto next" }, opts)
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "open quickfix list" }, opts)
+
 -- [[Base autocommands]] --
 vim.api.nvim_create_augroup("vimrc", { clear = true })
 
