@@ -50,7 +50,7 @@ return {
         event = 'VimEnter',
     },
     -- lsp setup
-    {'neovim/nvim-lspconfig'},
+    -- {'neovim/nvim-lspconfig'},
     -- adds pictograms in lsp popups
     {
         'onsails/lspkind.nvim',
