@@ -1,14 +1,4 @@
--- local keymap = vim.keymap
--- local fn = vim.fn
--- Mappings for diagnostic window
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
--- local opts = { noremap=true, silent=true }
--- keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "open quickfix list (floating)" }, opts)
--- keymap.set('n', ',n', vim.diagnostic.goto_prev, { desc = "quickfix: goto previous" }, opts)
--- keymap.set('n', ',p', vim.diagnostic.goto_next, { desc = "quickfix: goto next" }, opts)
--- keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "open quickfix list" }, opts)
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
+-- TODO remove this function
 local custom_lsp_attach = function(event)
     local bufnr = event.buf
 
@@ -50,6 +40,7 @@ local custom_lsp_attach = function(event)
 end
 
 -- pylsp config
+-- TODO move to separate module
 local pylsp_settings = function()
   local venv_path = os.getenv('VIRTUAL_ENV')
   local py_path = nil

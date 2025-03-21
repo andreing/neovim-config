@@ -1,7 +1,7 @@
 return {
     -- nvim port of solarized
     {
-        'maxmx03/solarized.nvim', 
+        'maxmx03/solarized.nvim',
         lazy = false,
         priority = 1000,
         opts = {variant = 'spring'},
@@ -37,20 +37,12 @@ return {
     --{'preservim/nerdcommenter'},
     -- highly configurable status bar for vim
     {'vim-airline/vim-airline'},
-    
     -- treesitter compatible rainbow delimiters
     -- {'hiphish/rainbow-delimiters.nvim'},
     -- Super fast git decorations implemented purely in Lua
     -- {'lewis6991/gitsigns.nvim'},
     -- golang synax highlighting
     {'charlespascoe/vim-go-syntax'},
-    -- highlight TODO, NOTE, etc.
-    {
-        'folke/todo-comments.nvim',
-        event = 'VimEnter',
-    },
-    -- lsp setup
-    -- {'neovim/nvim-lspconfig'},
     -- adds pictograms in lsp popups
     {
         'onsails/lspkind.nvim',
