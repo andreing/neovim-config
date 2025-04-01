@@ -33,23 +33,26 @@ return {
         end,
     },
     -- automatic commenting shortcuts
+    -- NOTE Not really sure this one is necessary
     --{'preservim/nerdcommenter'},
     -- highly configurable status bar for vim
     {'vim-airline/vim-airline'},
     -- treesitter compatible rainbow delimiters
+    -- BUG tries to load a dependency from gitlab
+    -- The dependency is not necessary, but i do not know how to exclude it
     -- {'hiphish/rainbow-delimiters.nvim'},
     -- Super fast git decorations implemented purely in Lua
-    -- {'lewis6991/gitsigns.nvim'},
     -- golang synax highlighting
     {
         'charlespascoe/vim-go-syntax',
+        ft = 'go',
     },
     -- show key-bindings in a popup
     {
         'folke/which-key.nvim',
         event = 'VimEnter',
         opts = {
-            delay = 0,
+            delay = 120,
         },
         -- Document existing key chains
         spec = {
@@ -64,6 +67,7 @@ return {
     -- paired characters
     {'echasnovski/mini.pairs'},
     -- my own highlight plugin
+    -- FIXME does not work as is with the plugin system in Lazy
     -- {
     --     dir = 'lua/word-highlight',
     --     -- lazy = false,
@@ -74,9 +78,9 @@ return {
     --     },
     -- },
     -- use icon glyphs in plugins that supports them (should always be loaded last)
-    -- TODO set priority so it is loaded last
     {
         'ryanoasis/vim-devicons',
-        priority = 1,
+        priority = 1, -- I think 1 is the lowest prio? (really should be set as dependency)
     },
+    --TODO nvim-cmp?
 }
