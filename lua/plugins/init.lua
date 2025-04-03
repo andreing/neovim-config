@@ -38,9 +38,9 @@ return {
     -- highly configurable status bar for vim
     {'vim-airline/vim-airline'},
     -- treesitter compatible rainbow delimiters
-    -- BUG tries to load a dependency from gitlab
-    -- The dependency is not necessary, but i do not know how to exclude it
-    -- {'hiphish/rainbow-delimiters.nvim'},
+    {
+        'hiphish/rainbow-delimiters.nvim',
+    },
     -- Super fast git decorations implemented purely in Lua
     -- golang synax highlighting
     {
