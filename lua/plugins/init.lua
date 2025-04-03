@@ -52,7 +52,7 @@ return {
         'folke/which-key.nvim',
         event = 'VimEnter',
         opts = {
-            delay = 120,
+            delay = 60,
         },
         -- Document existing key chains
         spec = {
