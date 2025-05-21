@@ -1,5 +1,6 @@
 -- TODO remove this function
 local custom_lsp_attach = function(event)
+    -- print("custom_lsp_attach")
     local bufnr = event.buf
 
     -- Enable completion triggered by <c-x><c-o>
@@ -18,6 +19,23 @@ local custom_lsp_attach = function(event)
         opts.buffer = bufnr
         vim.keymap.set(mode, l, r, opts)
     end
+
+    local code_action_all = function()
+        local params = vim.lsp.util.make_range_params()
+        params.context = {
+            triggerKind = vim.lsp.protocol.CodeActionTriggerKind.Invoked,
+            diagnostics = vim.lsp.diagnostic.get_line_diagnostics(),
+        }
+        local results =  vim.lsp.buf_request_sync(bufnr, "textDocument/codeAction", params)
+        for cid, result in pairs(results) do
+            for _, action in pairs(result.result or {}) do
+                print(string.format("%d: %s", cid, action.title))
+            end
+        end
+        return results
+    end
+
+    map('n', '<leader>cA', code_action_all, { desc = "try fetching all code actions"})
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     map('n', 'gD', vim.lsp.buf.declaration, { desc = "go to declaration" })
@@ -55,14 +73,11 @@ local pylsp_settings = function()
 
   local pylsp_plugins = {
     -- formatter options
-    --black = { enabled = true, skip_string_normalization = true },
     black = { enabled = false, skip_string_normalization = true },
     autopep8 = { enabled = false },
     yapf = { enabled = false },
-    --rope_autoimport = { enabled = true },
     rope_autoimport = { enabled = false },
     -- linter options
-    --pylint = { enabled = true, executable="pylint" },
     pylint = { enabled = false },
     ruff = { enabled = false },
     pyflakes = { enabled = false },
@@ -92,8 +107,8 @@ end
 
 local gopls_settings = function()
     -- organize imports on write
-    -- putting this here as I do not know where else it would belong
-    -- TODO should problably make separate files per lsp and do this sort of thing on require(...)
+    -- TODO putting this here as I do not know where else it would belong
+    -- should problably make separate files per lsp and do this sort of thing on require(...)
     vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*.go",
         callback = function()
@@ -145,7 +160,7 @@ return {
         { 'j-hui/fidget.nvim', opts = {} },
 
         -- Allows extra capabilities provided by nvim-cmp
-        --'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
         vim.api.nvim_create_autocmd('LspAttach', {
@@ -282,7 +297,7 @@ return {
       --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      -- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -328,6 +343,14 @@ return {
               -- cmd = { ... },
               -- filetypes = { ... },
               -- capabilities = {},
+              on_attach = function (event)
+                -- print("gopls on_attach")
+                -- FIXME this will not work. Guess the load order is fucked.
+                -- fix would be to somehow have a static map of keymaps which
+                -- can be modified like how Lazy does it if you include the
+                -- whole config
+                -- vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, { desc = "LSP code action (gopls)", buffer = event.bufnr, silent = false, remap = true })
+              end,
               settings = gopls_settings(),
           },
       }

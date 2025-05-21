@@ -6,7 +6,7 @@ return {
     keys = {
         -- find
         { "<leader><space>", "<cmd>FzfLua files<CR>", desc = "Find files (root dir)" },
-        { "<leader>ff", "<cmd>FzfLua files resume=true<CR>", desc = "Find files (root dir)" },
+        { "<leader>ff", "<cmd>FzfLua files resume=false<CR>", desc = "Find files (root dir)" },
         { "<leader>fF", "<cmd>FzfLua files root=false<CR>", desc = "Find files (cwd)" },
         { "<leader>fr", "<cmd>FzfLua oldfiles<CR>", desc = "Recent files" },
         { "<leader>fb", "<cmd>FzfLua buffers sort_mru=true sort_lastused=true<CR>", desc = "Buffers" },

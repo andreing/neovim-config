@@ -29,6 +29,7 @@ return {
                     "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "bash", "go", "python", "java"
                 },
                 highlight = { enable = true },
+                indent = { enable = true },
             }
         end,
     },
@@ -52,7 +53,7 @@ return {
         'folke/which-key.nvim',
         event = 'VimEnter',
         opts = {
-            delay = 60,
+            delay = 0,
         },
         -- Document existing key chains
         spec = {
@@ -65,7 +66,7 @@ return {
         --},
     },
     -- paired characters
-    {'echasnovski/mini.pairs'},
+    {'echasnovski/mini.pairs', opts={}},
     -- my own highlight plugin
     -- FIXME does not work as is with the plugin system in Lazy
     -- {
@@ -82,5 +83,4 @@ return {
         'ryanoasis/vim-devicons',
         priority = 1, -- I think 1 is the lowest prio? (really should be set as dependency)
     },
-    --TODO nvim-cmp?
 }
