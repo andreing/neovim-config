@@ -53,7 +53,8 @@ vim.keymap.set('n', '<leader>v', '<cmd>tabedit $MYVIMRC<CR>', { desc = 'Open vim
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save buffer' })
 
 vim.keymap.set('v', '//', 'y/<C-R>"<CR>', { desc = 'Search for selection', remap = false })
-vim.keymap.set('n', '<CR>', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlight', remap = false })
+-- WARN this one conflicts with quickfix window mapping for jumping to item
+-- vim.keymap.set('n', '<CR>', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlight', remap = false })
 vim.keymap.set('n', '<C-J>', 'ciW<CR><Esc><cmd>if match( @", "^\\s*$") < 0<Bar>exec "norm P-$diw+"<Bar>endif<CR>', { desc = 'Newline (normal)' })
 
 -- copy/paste to system clipboard

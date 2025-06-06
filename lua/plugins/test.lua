@@ -1,7 +1,9 @@
 local neotest_golang_opts = {
     log_level = vim.log.levels.INFO,
 }
-local neotest_python_opts = {}
+local neotest_python_opts = {
+    pytest_discover_instances = true,
+}
 
 -- testing in neovim
 return {
@@ -20,6 +22,10 @@ return {
             adapters = {
                 require("neotest-python")(neotest_python_opts),
                 require("neotest-golang")(neotest_golang_opts),
+            },
+            discovery = {
+                concurrent = 8,
+                enabled = true,
             },
         })
     end,
