@@ -31,7 +31,7 @@ return {
         { "<leader>sm", "<cmd>FzfLua marks<cr>", desc = "Jump to Mark" },
         { "<leader>sR", "<cmd>FzfLua resume<cr>", desc = "Resume" },
         { "<leader>sq", "<cmd>FzfLua quickfix<cr>", desc = "Quickfix List" },
-        { "<leader>sg", "<cmd>FzfLua grep_project<cr>", desc = "Project" },
+        { "<leader>sg", "<cmd>FzfLua grep_project resume=true<cr>", desc = "Project" },
         -- lsp
         {
             "<leader>ss",
