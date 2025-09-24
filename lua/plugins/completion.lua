@@ -28,6 +28,7 @@ return { -- Autocompletion
             },
         },
         'saadparwaiz1/cmp_luasnip',
+        'onsails/lspkind.nvim', -- for popup format config
 
         -- Adds other completion capabilities.
         'hrsh7th/cmp-nvim-lsp',
@@ -39,6 +40,7 @@ return { -- Autocompletion
         -- See `:help cmp`
         local cmp = require 'cmp'
         local luasnip = require 'luasnip'
+        local lspkind = require 'lspkind'
         luasnip.config.setup {}
 
         cmp.setup {
@@ -50,6 +52,18 @@ return { -- Autocompletion
             completion = { completeopt = 'menu,menuone,noinsert' },
             window = {
                 documentation = cmp.config.window.bordered()
+            },
+            formatting = {
+                format = lspkind.cmp_format({
+                    mode = 'symbol', -- show only symbol annotations
+                    maxwidth = {
+                        menu = 50,
+                        abbr = 50,
+                    },
+                    ellipsis_char = '...',
+                    show_labelDetails = true,
+
+                })
             },
 
             -- For an understanding of why these mappings were
@@ -115,6 +129,7 @@ return { -- Autocompletion
                 { name = 'path' },
                 { name = 'buffer' },
                 { name = 'nvim_lsp_signature_help' },
+                { name = 'render-markdown' },
             },
         }
     end,
